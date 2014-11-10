@@ -2,26 +2,99 @@
 <html>
   <head>
     <script src="jquery.js"></script>
+    <script src="jquery.timeago.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="bootstrap.css" />
   </head>
-  <body>
-    <script>
+  <body>  
+    <div class="container">
+      <div class="buttonnav">  
+        <button class='refreshbutton btn btn-primary'>
+          Refresh all User tweets!
+        </button>
+      </div>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        <nav>
+          <script>
+          $(document).ready(function(){
+            var $nav = $('nav');
+            
+            //refresh tweets function
+            var refreshTweets = function() {
+              var index = streams.home.length - 1;
+              while(index >= 0){
+                var tweet = streams.home[index];
+                var $tweet = $('<div></div>');
+                $tweet.addClass(tweet.user)
+                $tweet.html(' @' + '<b>'+tweet.user +'</b>' + ': ' + tweet.message + ' | <i>'+ $.timeago(tweet.created_at) +'</i>');
+                $tweet.appendTo($nav);
+                index -= 1;
+              }}
+              refreshTweets();
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+            //click refresh buttom
+            $('.refreshbutton').on('click', function() {
+              $nav.html('');
+              $('.newUserButton').remove();
+              refreshTweets();
+            });
 
-      });
 
-    </script>
+            //clicking on a username
+            $('nav').on('click', 'div', function() {
+              var clickedClass = $(this).attr('class');
+              $('.newUserButton').remove();
+              $nav.html('');
+              
+              var chooseUserStream = function() {
+                var index = streams.users[clickedClass].length -1;
+                
+                while(index >= 0) {
+                  var tweet = streams.users[clickedClass][index];
+                  var $tweet = $('<div></div>');
+                  $tweet.addClass(clickedClass);
+                  $tweet.html(' @' + '<b>'+tweet.user +'</b>' + ': ' + tweet.message + ' | <i>'+ $.timeago(tweet.created_at) +'</i>');
+                  $tweet.appendTo($nav);
+                  index -= 1;
+                }
+
+                var $newUserButton = $('<button class="btn btn-success newUserButton">Click to view more tweets by ' + clickedClass + '</button>');
+                $newUserButton.attr('id', clickedClass);
+                $newUserButton.appendTo($('.buttonnav'));
+              }
+              chooseUserStream();
+            });
+            
+
+            //clicking new User Button
+            $('.buttonnav').on('click', '.newUserButton', function() {
+              var clickedClass = $(this).attr('id');
+              console.log(clickedClass)
+              $nav.html('')
+              var chooseUserStream = function() {
+                var index = streams.users[clickedClass].length -1;
+                
+                while(index >= 0) {
+                  var tweet = streams.users[clickedClass][index];
+                  var $tweet = $('<div></div>');
+                  $tweet.addClass(clickedClass);
+                  $tweet.html(' @' + '<b>'+tweet.user +'</b>' + ': ' + tweet.message + ' | <i>'+ $.timeago(tweet.created_at) +'</i>');
+                  $tweet.appendTo($nav);
+                  index -= 1;
+                }
+                $('.newUserButton').remove();
+                var $newUserButton = $('<button class="btn btn-success newUserButton">Refresh ' + clickedClass + 's Tweets</button>');
+                $newUserButton.attr('id', clickedClass);
+                $newUserButton.appendTo($('.buttonnav'));
+              }
+              chooseUserStream();
+            });
+            
+          })
+
+        </script>
+      </nav>
+    </div>
   </body>
-</html>
+  </html>
+  
