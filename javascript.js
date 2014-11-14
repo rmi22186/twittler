@@ -73,4 +73,11 @@ $(document).ready(function(){
     }, 5000);
     refreshHomePageTweets();
   })
+
+
+  var username = prompt("What hande would you like to use?", 'Enter your username here')
+  console.log(username)
+  streams.users.username = [];
+
+  
 })
