@@ -5,6 +5,12 @@
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+/*-------start of bootstrap*/
+
+h1, h2, h3, h4, h5, h6 {
+  display:inline;
+}
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -267,14 +273,14 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('glyphicons-halflings-regular.eot');
+  src: url('glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('glyphicons-halflings-regular.ttf') format('truetype'), url('glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
+  font-family: 'Glyphicons Halflings' !important; 
   font-style: normal;
   font-weight: normal;
   line-height: 1;
@@ -6356,3 +6362,45 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+body {
+  background-color: #d5d5d5;
+}
+
+.left-nav-card,
+
+.card {
+  background: #fff;
+  border: 1px solid #AAA;
+  border-bottom:3px solid #BBB;
+  padding:10px;
+  margin:15px;
+  /*display: block;*/
+}
+
+.card-similar {
+  border: 1px solid #AAA;
+  
+  padding:10px;
+  margin:15px;
+}
+
+.timestamp {
+    color: #8899a6;
+    float: right;
+  }
+
+html {
+  overflow-y: scroll;
+}
+
+.card {
+  width: 100%;
+}
+
+.container {
+  background-color: white;
+}
+.row {
+  background-color: yellow;
+}
