@@ -75,9 +75,29 @@ $(document).ready(function(){
   })
 
 
-  var username = prompt("What hande would you like to use?", 'Enter your username here')
-  console.log(username)
-  streams.users.username = [];
+  var newPerson = prompt("What hande would you like to use?", 'Enter your username here')
+  console.log(newPerson)
+  streams.users[newPerson] = [];
+  streams.home = [];
 
-  
+  $('#tweet-form').keypress(function(e) {
+      if (event.which == 13 ) {
+        event.preventDefault();
+        $('.submit-tweet').click();   // can't get ".submit()" to work
+      }
+  });
+
+  $('.submit-tweet').on('click', function() {
+    var submittedTweet = $('#tweet-form').val();
+    $('#tweet-form').val('');
+    var tweet = {};
+    tweet.message = submittedTweet;
+    tweet.user = newPerson;
+    tweet.created_at = new Date();
+    var addNewTweet = function(tweet) {  
+      streams.home.push(tweet);
+      streams.users[newPerson].push(tweet);
+    };
+    addNewTweet(tweet);
+  })    
 })
